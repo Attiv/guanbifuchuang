@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'guanbixiugaiqi' target in the 'guanbixiugaiqi' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif
