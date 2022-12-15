@@ -7,6 +7,7 @@
 
 #import "VTCommon.h"
 
+
 @implementation VTCommon
 + (VTCommon *)shared {
     static VTCommon *tool;

@@ -11,8 +11,9 @@
 		AE84AAD629069A6F0008BF96 /* guanbixiugaiqi.mm in Sources */ = {isa = PBXBuildFile; fileRef = AE84AAD529069A6F0008BF96 /* guanbixiugaiqi.mm */; };
 		AE84AAE229069AE20008BF96 /* VTCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = AE84AAE029069AE20008BF96 /* VTCommon.h */; };
 		AE84AAE329069AE20008BF96 /* VTCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = AE84AAE129069AE20008BF96 /* VTCommon.m */; };
-		AE84AAE72906A5E40008BF96 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE84AAE62906A5E40008BF96 /* AVFoundation.framework */; };
-		AE84AAE92906A6210008BF96 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE84AAE82906A6210008BF96 /* UIKit.framework */; };
+		AE89E27C294B50B900F2FC1C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE89E27B294B50B900F2FC1C /* AVFoundation.framework */; };
+		AE89E27E294B50C000F2FC1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE89E27D294B50C000F2FC1C /* UIKit.framework */; };
+		AE89E280294B50CA00F2FC1C /* AVFAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE89E27F294B50CA00F2FC1C /* AVFAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,9 +25,9 @@
 		AE84AADA29069A6F0008BF96 /* guanbixiugaiqi.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = guanbixiugaiqi.plist; sourceTree = "<group>"; };
 		AE84AAE029069AE20008BF96 /* VTCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTCommon.h; sourceTree = "<group>"; };
 		AE84AAE129069AE20008BF96 /* VTCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTCommon.m; sourceTree = "<group>"; };
-		AE84AAE42906A5CD0008BF96 /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/AVFAudio.framework; sourceTree = DEVELOPER_DIR; };
-		AE84AAE62906A5E40008BF96 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
-		AE84AAE82906A6210008BF96 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		AE89E27B294B50B900F2FC1C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		AE89E27D294B50C000F2FC1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		AE89E27F294B50CA00F2FC1C /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/Library/Frameworks/AVFAudio.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,8 +35,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE84AAE92906A6210008BF96 /* UIKit.framework in Frameworks */,
-				AE84AAE72906A5E40008BF96 /* AVFoundation.framework in Frameworks */,
+				AE89E280294B50CA00F2FC1C /* AVFAudio.framework in Frameworks */,
+				AE89E27E294B50C000F2FC1C /* UIKit.framework in Frameworks */,
+				AE89E27C294B50B900F2FC1C /* AVFoundation.framework in Frameworks */,
 				AE84AACE29069A6F0008BF96 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,9 +65,9 @@
 		AE84AACC29069A6F0008BF96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AE84AAE82906A6210008BF96 /* UIKit.framework */,
-				AE84AAE62906A5E40008BF96 /* AVFoundation.framework */,
-				AE84AAE42906A5CD0008BF96 /* AVFAudio.framework */,
+				AE89E27F294B50CA00F2FC1C /* AVFAudio.framework */,
+				AE89E27D294B50C000F2FC1C /* UIKit.framework */,
+				AE89E27B294B50B900F2FC1C /* AVFoundation.framework */,
 				AE84AACD29069A6F0008BF96 /* Foundation.framework */,
 			);
 			name = Frameworks;

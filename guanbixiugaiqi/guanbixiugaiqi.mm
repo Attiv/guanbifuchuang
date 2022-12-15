@@ -34,24 +34,57 @@
 
 @implementation guanbixiugaiqi
 
++ (guanbixiugaiqi *)shared {
+    static guanbixiugaiqi *tool;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        tool = [[guanbixiugaiqi alloc] init];
+    });
+    return tool;
+}
+
 + (void)load {
     //几秒出悬浮窗
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        ///音量键关闭
-        NSError *error;
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:@"AVSystemController_SystemVolumeDidChangeNotification"
-                                                      object:nil];
-        [[AVAudioSession sharedInstance] setActive:YES error:&error];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(yinLiangDianJi)
-                                                     name:@"AVSystemController_SystemVolumeDidChangeNotification"
-                                                   object:nil];
+        
+        
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setCategory:AVAudioSessionCategoryAmbient error:nil];//重点方法
+            
+            [audioSession setActive:YES error:nil];
+            
+            NSError *error;
+            
+            [[AVAudioSession sharedInstance] setActive:YES error:&error];
+            
+        [audioSession addObserver:[guanbixiugaiqi shared] forKeyPath:@"outputVolume" options:NSKeyValueObservingOptionNew context:nil];
         [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     });
 }
 
-+ (void)yinLiangDianJi {
++ (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"outputVolume"]) {
+        // 获取音量变化的值
+        float volume = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+        // 根据音量变化的值进行相应的处理
+        [[guanbixiugaiqi shared] yinLiangDianJi];
+    }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"outputVolume"]) {
+        // 获取音量变化的值
+        float volume = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+        // 根据音量变化的值进行相应的处理
+        [self yinLiangDianJi];
+    }
+}
+
+- (void)yinLiangDianJi {
     [VTCommon shared].buttonIsHide = ![VTCommon shared].buttonIsHide;
 
     NSArray *windows = [UIApplication sharedApplication].windows;
