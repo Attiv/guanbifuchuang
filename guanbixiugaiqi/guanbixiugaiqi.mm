@@ -19,6 +19,8 @@
 #import <Foundation/Foundation.h>
 #import "CaptainHook/CaptainHook.h"
 #include <notify.h> // not required; for examples only
+#import <MediaPlayer/MediaPlayer.h>
+//#import <WebAds/InterstitialAdViewController.h>
 
 // Objective-C runtime hooking using CaptainHook:
 //   1. declare class using CHDeclareClass()
@@ -29,7 +31,7 @@
 
 
 @interface guanbixiugaiqi : NSObject
-
+@property (nonatomic, strong) MPVolumeView *volumeView;
 @end
 
 @implementation guanbixiugaiqi
@@ -48,41 +50,41 @@
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
+        [guanbixiugaiqi shared];
         
-        
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setCategory:AVAudioSessionCategoryAmbient error:nil];//重点方法
-            
-            [audioSession setActive:YES error:nil];
-            
-            NSError *error;
-            
-            [[AVAudioSession sharedInstance] setActive:YES error:&error];
-            
-        [audioSession addObserver:[guanbixiugaiqi shared] forKeyPath:@"outputVolume" options:NSKeyValueObservingOptionNew context:nil];
-        [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+//        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+//        [audioSession setCategory:AVAudioSessionCategoryAmbient error:nil];//重点方法
+//            
+//            [audioSession setActive:YES error:nil];
+//            
+//            NSError *error;
+//            
+//            [[AVAudioSession sharedInstance] setActive:YES error:&error];
+//            
+//        [audioSession addObserver:[guanbixiugaiqi shared] forKeyPath:@"outputVolume" options:NSKeyValueObservingOptionNew context:nil];
+//        [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     });
 }
-
-+ (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"outputVolume"]) {
-        // 获取音量变化的值
-        float volume = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
-        // 根据音量变化的值进行相应的处理
-        [[guanbixiugaiqi shared] yinLiangDianJi];
-    }
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"outputVolume"]) {
-        // 获取音量变化的值
-        float volume = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
-        // 根据音量变化的值进行相应的处理
-        [self yinLiangDianJi];
-    }
-}
+//
+//+ (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+//{
+//    if ([keyPath isEqualToString:@"outputVolume"]) {
+//        // 获取音量变化的值
+//        float volume = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+//        // 根据音量变化的值进行相应的处理
+//        [[guanbixiugaiqi shared] yinLiangDianJi];
+//    }
+//}
+//
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context
+//{
+//    if ([keyPath isEqualToString:@"outputVolume"]) {
+//        // 获取音量变化的值
+//        float volume = [[change objectForKey:NSKeyValueChangeNewKey] floatValue];
+//        // 根据音量变化的值进行相应的处理
+//        [self yinLiangDianJi];
+//    }
+//}
 
 - (void)yinLiangDianJi {
     [VTCommon shared].buttonIsHide = ![VTCommon shared].buttonIsHide;
@@ -110,13 +112,45 @@
 {
 	if ((self = [super init]))
 	{
+        // 创建 MPVolumeView，并添加到视图层级结构
+              self.volumeView = [[MPVolumeView alloc] initWithFrame:CGRectMake(10000, 0, 0, 0)];
+              [[UIApplication sharedApplication].windows.firstObject addSubview:self.volumeView];
+              
+              // 遍历 MPVolumeView 的 subviews，找到音量滑块
+              for (UIView *view in [self.volumeView subviews]){
+                  if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+                      UISlider *volumeSlider = (UISlider *)view;
+                      
+                      // 添加 valueChanged 监听
+                      [volumeSlider addTarget:self action:@selector(volumeChanged:) forControlEvents:UIControlEventValueChanged];
+                      break;
+                  }
+              }
 	}
 
     return self;
 }
 
+- (void)volumeChanged:(UISlider *)slider {
+    // 执行音量点击事件
+    [self yinLiangDianJi];
+}
+
 @end
 
+#pragma mark -----
+CHDeclareClass(UIApplication)
+CHOptimizedMethod(2, self, void, UIApplication, motionEnded, UIEventSubtype, motion, withEvent, UIEvent *, event) {
+    CHSuper(2, UIApplication, motionEnded, motion, withEvent, event);
+    
+    if (motion == UIEventSubtypeMotionShake) {
+        [[guanbixiugaiqi shared] yinLiangDianJi];
+    }
+}
+CHConstructor {
+    CHLoadLateClass(UIApplication);
+    CHHook(2, UIApplication, motionEnded, withEvent);
+}
 
 @class ClassToHook;
 

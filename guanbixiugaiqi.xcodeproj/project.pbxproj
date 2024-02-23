@@ -14,6 +14,7 @@
 		AE89E27C294B50B900F2FC1C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE89E27B294B50B900F2FC1C /* AVFoundation.framework */; };
 		AE89E27E294B50C000F2FC1C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE89E27D294B50C000F2FC1C /* UIKit.framework */; };
 		AE89E280294B50CA00F2FC1C /* AVFAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE89E27F294B50CA00F2FC1C /* AVFAudio.framework */; };
+		AEC789B62B88AC5C00C5BC96 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEC789B52B88AC5C00C5BC96 /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		AE89E27B294B50B900F2FC1C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		AE89E27D294B50C000F2FC1C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/iOSSupport/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		AE89E27F294B50CA00F2FC1C /* AVFAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFAudio.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.0.sdk/System/Library/Frameworks/AVFAudio.framework; sourceTree = DEVELOPER_DIR; };
+		AEC789B52B88AC5C00C5BC96 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.2.sdk/System/iOSSupport/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEC789B62B88AC5C00C5BC96 /* MediaPlayer.framework in Frameworks */,
 				AE89E280294B50CA00F2FC1C /* AVFAudio.framework in Frameworks */,
 				AE89E27E294B50C000F2FC1C /* UIKit.framework in Frameworks */,
 				AE89E27C294B50B900F2FC1C /* AVFoundation.framework in Frameworks */,
@@ -65,6 +68,7 @@
 		AE84AACC29069A6F0008BF96 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEC789B52B88AC5C00C5BC96 /* MediaPlayer.framework */,
 				AE89E27F294B50CA00F2FC1C /* AVFAudio.framework */,
 				AE89E27D294B50C000F2FC1C /* UIKit.framework */,
 				AE89E27B294B50B900F2FC1C /* AVFoundation.framework */,
@@ -306,6 +310,7 @@
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MonkeyDevBuildPackageOnAnyBuild = NO;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
@@ -337,6 +342,7 @@
 					"$(MonkeyDevTheosPath)/vendor/include/**",
 				);
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MonkeyDevBuildPackageOnAnyBuild = NO;
 				MonkeyDevClearUiCacheOnInstall = NO;
 				MonkeyDevCopyOnBuild = NO;
