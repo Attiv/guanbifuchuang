@@ -147,10 +147,31 @@ CHOptimizedMethod(2, self, void, UIApplication, motionEnded, UIEventSubtype, mot
         [[guanbixiugaiqi shared] yinLiangDianJi];
     }
 }
+
+
 CHConstructor {
     CHLoadLateClass(UIApplication);
     CHHook(2, UIApplication, motionEnded, withEvent);
 }
+
+CHDeclareClass(UIWindow);
+CHMethod(1, void, UIWindow, sendEvent, UIEvent *, event) {
+    NSSet *allTouches = [event allTouches];
+    if ([allTouches count] == 3) {
+        for (UITouch *touch in allTouches) {
+            if (touch.phase == UITouchPhaseBegan) {
+                // 在这里触发你的事件
+                [[guanbixiugaiqi shared] yinLiangDianJi];
+            }
+        }
+    }
+    CHSuper(1, UIWindow, sendEvent, event);
+}
+CHConstructor {
+    CHLoadLateClass(UIWindow);
+    CHHook(1, UIWindow, sendEvent);
+}
+
 
 @class ClassToHook;
 
